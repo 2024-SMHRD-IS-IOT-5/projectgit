@@ -8,6 +8,7 @@ const userrouter = require("./routes/userrouter");
 // 프로필 화면
 const session = require("express-session");
 const path = require("path");
+
 const coverrouter = require("./routes/coverrouter");//덮개
 const w_setrouter = require("./routes/w_setrouter");//수위설정
 const waterrouter = require("./routes/waterrouter");//급수
@@ -22,10 +23,6 @@ app.use(
         saveUninitialized: true,
     })
 );
-app.use("/cover",coverrouter); //덮개
-app.use("/w_set",w_setrouter); //수위설정
-app.use("/water",waterrouter); //급수
-app.use("/w",wrouter);         //물상태
 
 // 정적 파일 서빙
 app.use(express.static(path.join(__dirname, "views")));
@@ -34,6 +31,12 @@ app.use(express.static(path.join(__dirname, "views")));
 app.use(bp.urlencoded({extended:true}));
 app.use("/", mainrouter);
 app.use("/user", userrouter);
+
+
+app.use("/cover",coverrouter); //덮개
+app.use("/w_set",w_setrouter); //수위설정
+app.use("/water",waterrouter); //급수
+app.use("/w",wrouter);         //물상태
 
 
 app.set("view engine", "html")
