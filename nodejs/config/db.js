@@ -10,15 +10,20 @@ const conn = mysql.createConnection({
     port : 3307,
     // 사용자 계정 정보
     user : "campus_24IS_IOT2_p2_4",
-    // 사용자 계정 비밀번호
+    // 사용자 계정 비밀번호 
     password : "smhrd4", 
     // 연결할 데이터베이스 이름
     database : "campus_24IS_IOT2_p2_4"
 })
 
-// 실제 DB와 연결
-conn.connect();
-console.log("디비 연결!");
 
+// 실제 DB와 연결
+conn.connect((err) => {
+    if (err) {
+        console.error('데이터베이스 접속 실패')
+        return
+    }
+    console.log('데이터베이스 접속 성공!')
+})
 
 module.exports = conn;
