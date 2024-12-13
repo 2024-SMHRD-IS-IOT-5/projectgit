@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로필 선택 및 관리</title>
+    <style>
+        #profiles div {
+            display: inline-block;
+            margin-right: 20px;
+            text-align: center;
+        }
+
+        #profiles img {
+            display: block;
+            margin: 0 auto;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        #profiles button {
+            display: block;
+            margin: 5px auto;
+        }
+
+        #create-profile-section {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>프로필 선택</h1>
+    <div id="profiles"></div>
+    <button id="create-profile-btn">+ 프로필 생성</button>
+
+    <!-- 프로필 생성 섹션 -->
+    <div id="create-profile-section">
+        <h2>프로필 생성</h2>
+        <form id="create-profile-form">
+            <label for="profile-name">프로필 이름:</label>
+            <input type="text" id="profile-name" name="profile_name" required>
+            <br><br>
+
+            <label for="avatar-url">아바타 URL:</label>
+            <input type="text" id="avatar-url" name="avatar_url" placeholder="이미지 URL 입력">
+            <br><br>
+
+            <button type="submit">생성</button>
+            <button type="button" id="cancel-create-profile">취소</button>
+        </form>
+        <div id="result-message" style="margin-top: 20px;"></div>
+    </div>
+
+    <script>
+        // 프로필 목록 불러오기
+        fetch("/user/profiles")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to fetch profiles");
+                }
+                return response.json();
+            })
+            .then((profiles) => {
+                const profilesDiv = document.getElementById("profiles");
+                profiles.forEach((profile) => {
+                    const profileDiv = document.createElement("div");
+
+                    // 이미지 추가
+                    const img = document.createElement("img");
+                    img.src = profile.avatar_url || "https://via.placeholder.com/100"; // 기본 이미지 설정
+                    img.alt = profile.profile_name;
+                    img.style.width = "50px";
+                    img.style.height = "50px";
+
+
+
+                    // 프로필 이름 버튼 추가
+                    const button = document.createElement("button");
+                    button.textContent = profile.profile_name;
+                    button.onclick = () => {
+                        fetch("/user/select-profile", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ profileId: profile.profile_id }),
+                        })
+                            .then((response) => {
+                                if (!response.ok) {
+                                    throw new Error("Failed to select profile");
+                                }
+                                // 개인화된 화면으로 이동
+                                window.location.href = "/user/personalized-page";
+                            })
+                            .catch((error) => {
+                                console.error("Failed to select profile:", error);
+                                alert("프로필 선택에 실패했습니다. 다시 시도해주세요.");
+                            });
+                    };
+
+                    // **수정 버튼 추가**
+                    const editButton = document.createElement("button");
+                    editButton.textContent = "수정";
+                    editButton.onclick = () => editProfile(profile.profile_id);
+
+                    // **삭제 버튼 추가**
+                    const deleteButton = document.createElement("button");
+                    deleteButton.textContent = "삭제";
+                    deleteButton.onclick = () => deleteProfile(profile.profile_id);
+
+                    // 프로필 항목에 추가
+                    profileDiv.appendChild(img);
+                    profileDiv.appendChild(button);
+                    profileDiv.appendChild(editButton); // 수정 버튼
+                    profileDiv.appendChild(deleteButton); // 삭제 버튼
+                    profilesDiv.appendChild(profileDiv);
+                });
+            });
+
+                    // **수정 함수**
+        function editProfile(profileId) {
+            const newProfileName = prompt("새 프로필 이름:");
+            const newAvatarUrl = prompt("새 이미지 URL:");
+
+            if (newProfileName && newAvatarUrl) {
+                fetch("/user/update-profile", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ profileId, profile_name: newProfileName, avatar_url: newAvatarUrl }),
+                })
+                    .then((response) => {
+                        if (!response.ok) throw new Error("수정 실패");
+                        alert("프로필이 수정되었습니다.");
+                        window.location.reload(); // 페이지 새로고침
+                    })
+                    .catch((err) => alert(err.message));
+            }
+        }
+
+        // **삭제 함수**
+        function deleteProfile(profileId) {
+            if (confirm("정말로 이 프로필을 삭제하시겠습니까?")) {
+                fetch("/user/delete-profile", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ profileId }),
+                })
+                    .then((response) => {
+                        if (!response.ok) throw new Error("삭제 실패");
+                        alert("프로필이 삭제되었습니다.");
+                        window.location.reload(); // 페이지 새로고침
+                    })
+                    .catch((err) => alert(err.message));
+            }
+        }
+    
+
+
+        // "프로필 생성" 버튼 클릭 시 생성 섹션 표시
+        const createProfileBtn = document.getElementById("create-profile-btn");
+        const createProfileSection = document.getElementById("create-profile-section");
+        const cancelCreateProfileBtn = document.getElementById("cancel-create-profile");
+
+        createProfileBtn.addEventListener("click", () => {
+            createProfileSection.style.display = "block";
+        });
+
+        cancelCreateProfileBtn.addEventListener("click", () => {
+            createProfileSection.style.display = "none";
+        });
+
+        // 프로필 생성 폼 제출 처리
+        document.getElementById("create-profile-form").addEventListener("submit", function (event) {
+            event.preventDefault(); // 기본 폼 제출 방지
+
+            const profileName = document.getElementById("profile-name").value;
+            const avatarUrl = document.getElementById("avatar-url").value;
+
+            fetch("/user/create-profile", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    profile_name: profileName,
+                    avatar_url: avatarUrl,
+                }),
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Failed to create profile");
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    document.getElementById("result-message").textContent =
+                        "프로필이 성공적으로 생성되었습니다!";
+                    createProfileSection.style.display = "none"; // 생성 섹션 숨김
+                    document.getElementById("create-profile-form").reset();
+
+                    // 새로 생성된 프로필 추가
+                    const profilesDiv = document.getElementById("profiles");
+                    const button = document.createElement("button");
+                    button.textContent = profileName;
+                    button.onclick = () => {
+                        fetch("/user/select-profile", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ profileId: data.profileId }),
+                        }).then(() => {
+                            window.location.href = "/user/personalized-page";
+                        });
+                    };
+                    profilesDiv.appendChild(button);
+                })
+                .catch((error) => {
+                    console.error("Error creating profile:", error);
+                    document.getElementById("result-message").textContent =
+                        "프로필 생성에 실패했습니다. 다시 시도해주세요.";
+                });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        폼태그로 아이디와 pw, 닉네임을 입력받아서 user 라우터에 전달
+    -->
+        <form method="post" action="http://localhost:3000/user/update">
+            <h4>ID와 PW를 입력하세요</h4>
+            <label>ID : </label> <input type="text" name="user_id">
+            <label>PW : </label> <input type="password" name="user_pw"> <br/>
+            <h4>수정할 정보</h4>
+            <label>NICK : </label> <input type="text" name="user_nick">
+            <label>GENDER : </label> <input type="text" name="user_gender">
+            <label>원하는 온도 : </label> <input type="number" name="pref_temp" step="0.1" value="0.0" required>
+            <label>자동덮개 (Y/N) : </label> <input type="text" name="auto_cover" maxlength="1">
+            <input type="submit" value="회원정보수정">
+        </form>
+</body>
+</html>

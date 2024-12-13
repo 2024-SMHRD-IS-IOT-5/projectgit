@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 페이지</title>
+</head>
+<body>
+    <h1>회원가입 페이지</h1>
+    <form method="post" action="http://localhost:3000/user/join">
+        <!-- 회원 아이디 -->
+        ID: <input type="text" name="user_id" required> <br><br>
+
+        <!-- 회원 비밀번호 -->
+        PW: <input type="password" name="user_pw" required> <br><br>
+
+        <!-- 회원 성별 -->
+        Gender (M/F): <input type="text" name="user_gender" maxlength="1" required> <br><br>
+
+        <!-- 회원 닉네임 -->
+        Nickname: <input type="text" name="user_nick"> <br><br>
+
+        <!-- 최고 온도 -->
+        High Temp: <input type="number" name="high_temp" step="0.1" value="0.0" required> <br><br>
+
+        <!-- 최저 온도 -->
+        Low Temp: <input type="number" name="low_temp" step="0.1" value="0.0" required> <br><br>
+
+        <!-- 선호 온도 -->
+        Preference Temp: <input type="number" name="pref_temp" step="0.1" value="0.0" required> <br><br>
+
+        <!-- 자동 덮개 (Y/N) -->
+        Auto Cover (Y/N): <input type="text" name="auto_cover" maxlength="1"> <br><br>
+
+        <!-- 가입일은 자동 처리되므로 입력 불필요 -->
+
+        <!-- 수정일은 자동 처리되므로 입력 불필요 -->
+
+        <input type="submit" value="회원가입">
+    </form>
+</body>
+</html>
