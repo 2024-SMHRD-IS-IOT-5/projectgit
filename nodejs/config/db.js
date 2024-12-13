@@ -16,9 +16,14 @@ const conn = mysql.createConnection({
     database : "campus_24IS_IOT2_p2_4"
 })
 
-// 실제 DB와 연결
-conn.connect();
-console.log("디비 연결!");
 
+// 실제 DB와 연결
+conn.connect((err) => {
+    if (err) {
+        console.error('데이터베이스 접속 실패')
+        return
+    }
+    console.log('데이터베이스 접속 성공!')
+})
 
 module.exports = conn;
