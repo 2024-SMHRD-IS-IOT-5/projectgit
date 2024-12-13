@@ -10,7 +10,7 @@ const conn = mysql.createConnection({
     port : 3307,
     // 사용자 계정 정보
     user : "campus_24IS_IOT2_p2_4",
-    // 사용자 계정 비밀번호 신은지바보
+    // 사용자 계정 비밀번호 
     password : "smhrd4", 
     // 연결할 데이터베이스 이름
     database : "campus_24IS_IOT2_p2_4"
