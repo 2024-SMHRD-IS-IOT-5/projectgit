@@ -25,7 +25,8 @@ app.use(
 );
 
 // 정적 파일 서빙
-app.use(express.static(path.join(__dirname, "views")));
+app.use(express.static(path.join(__dirname, '..', 'react', 'build'))); // 리액트 프로그램 경로 설정
+
 
 
 app.use(bp.urlencoded({extended:true}));

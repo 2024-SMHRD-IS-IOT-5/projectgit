@@ -1,0 +1,184 @@
+/* 공통 스타일 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #2c2c2c; /* 배경색 */
+    color: white;
+    width: auto; /*고정된 가로 너비 */
+    height: auto;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 15px;
+    background-color: #1f1f1f; /* 헤더 배경 */
+    color: white;
+    border-bottom: 1px solid #444; /* 헤더 구분선 */
+    height: auto;
+}
+
+header button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 0;
+    padding:0;
+    
+}
+
+header span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+  /* 본문 */
+div h1 {
+    text-align: center;
+    margin: 20px ;
+    font-size: 24px;
+  }
+  
+  .setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #444; /* 항목 배경 */
+    margin: 30px 20px;
+    
+    padding: 10px 30px;
+    border-radius: 5px;
+    height: 50px;
+  }
+  
+  .setting-item span {
+    font-size: 18px;
+  }
+  
+  .switch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .switch img {
+    width: 40px;
+    height: 20px;
+  }
+  
+  .switch.on {
+    background-color: #4caf50; /* ON 상태 색상 */
+  }
+  
+  .switch.off {
+    background-color: #f44336; /* OFF 상태 색상 */
+  }
+  
+  /* 로그아웃 버튼 */
+  button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #d32f2f;
+  }
+  
+  /* 푸터 툴바 */
+  /* 하단 툴바 컨테이너 */
+.footer-toolbar {
+    display: flex;
+    justify-content: space-around; /* 아이템 간 간격 균등 */
+    align-items: center;
+    /* position: absolute; */
+    bottom: 0;
+    width: 100%;
+    height: 70px; /* 툴바 높이 */
+    background-color: #1f232d; /* 다크 배경 */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); /* 상단 그림자 */
+    color: #ffffff;
+    z-index: 1000; /* 다른 콘텐츠 위로 배치 */
+    overflow: hidden; /* 툴바 밖으로 벗어나는 요소 숨기기 */
+  }
+
+/* 기본 스타일 */
+.settings-container {
+  padding: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 50px 0;
+  font-size: 16px;
+  color: white;
+}
+
+/* 스위치 스타일 */
+.switch {
+  width: 50px;
+  height: 25px;
+  border-radius: 15px;
+  background-color: #ccc;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.switch-on {
+  background-color: #4cd964; /* 켜짐 상태 */
+}
+
+.switch-thumb {
+  width: 23px;
+  height: 23px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  transition: left 0.3s ease;
+}
+
+.switch-on .switch-thumb {
+  left: 26px; /* 켜짐 상태에서 오른쪽으로 이동 */
+}
+
+/* 로그아웃 버튼 스타일 */
+.logout-button {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin: 20px auto;
+  padding: 10px;
+  font-size: 16px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}

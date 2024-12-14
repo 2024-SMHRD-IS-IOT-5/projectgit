@@ -1,0 +1,53 @@
+/* 쇼핑몰 영역 스타일 */
+.shopping-mall {
+    height: 540px; /* 쇼핑몰 영역 높이 */
+    /* overflow-x:auto; 수직 스크롤 활성화 */
+    padding: 10px;
+    background-color: gray; /* 밝은 배경색 */
+    border-radius: 10px; /* 모서리 둥글게 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    -ms-overflow-style: none;
+  } ::-webkit-scrollbar {
+    display: none;
+  } 
+  
+  .shopping-mall h2 {
+    text-align: center;
+    font-size: 1.2rem; /* 제목 크기 */
+    margin-bottom: 10px;
+    color: #333333; /* 제목 색상 */
+  }
+  
+  /* 아이템 레이아웃 */
+  .item-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 3열 레이아웃 */
+    gap: 10px; /* 아이템 간 간격 */
+  }
+  
+  /* 아이템 카드 스타일 */
+  .item-card {
+    background-color: white; /* 카드 배경색 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    text-align: center;
+    padding: 8px; /* 카드 내부 여백 */
+  }
+  
+  .item-image {
+    width: 80px; /* 이미지 크기 */
+    height: auto;
+    margin-bottom: 5px; /* 이미지와 텍스트 간 간격 */
+  }
+  
+  .item-name {
+    font-size: 0.8rem; /* 이름 텍스트 크기 */
+    margin: 5px 0;
+    color: black; /* 이름 텍스트 색상 */
+  }
+  
+  .item-price {
+    font-size: 0.7rem; /* 가격 텍스트 크기 */
+    color: gray; /* 가격 텍스트 색상 */
+  }
+  

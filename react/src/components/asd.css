@@ -1,0 +1,60 @@
+/* 기본 스타일 */
+.settings-container {
+    padding: 20px;
+  }
+  
+  .setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    font-size: 16px;
+    color: white;
+  }
+  
+  /* 스위치 스타일 */
+  .switch {
+    width: 50px;
+    height: 25px;
+    border-radius: 15px;
+    background-color: #ccc;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .switch-on {
+    background-color: #4cd964; /* 켜짐 상태 */
+  }
+  
+  .switch-thumb {
+    width: 23px;
+    height: 23px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    transition: left 0.3s ease;
+  }
+  
+  .switch-on .switch-thumb {
+    left: 26px; /* 켜짐 상태에서 오른쪽으로 이동 */
+  }
+  
+  /* 로그아웃 버튼 스타일 */
+  .logout-button {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin: 20px auto;
+    padding: 10px;
+    font-size: 16px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+  }
+  

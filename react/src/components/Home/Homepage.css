@@ -1,0 +1,110 @@
+/* 전체 페이지 스타일 */
+.homepage-container {
+  width: 428px; /* 고정된 가로 너비 */
+  height: 926px; /* 고정된 세로 높이 */
+  margin: auto; /* 화면 중앙 배치 */
+  background-color: #2b2f3a; /* 다크 배경색 */
+  color: #ffffff; /* 텍스트 색상 */
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box; /* 패딩 포함 크기 계산 */
+  padding: 20px; /* 기본 패딩 추가 */
+}
+
+/* 헤더 스타일 */
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  background-color: #1f232d; /* 헤더 배경색 */
+  color: #ffffff; /* 헤더 텍스트 색상 */
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* 본문 콘텐츠 스타일 */
+.content {
+  flex: 1; /* 헤더와 푸터 사이의 공간을 꽉 채움 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.welcome-title {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #00bcd4; /* 강조 색상 */
+}
+
+.welcome-text {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #ffffff;
+}
+
+/* 버튼 스타일 */
+.button-group {
+  display: flex;
+  justify-content: center; /* 버튼을 중앙 정렬 */
+  gap: 20px; /* 버튼 간격 */
+  width: 100%; /* 버튼 그룹 너비 */
+  margin-top: 20px; /* 위아래 간격 */
+}
+
+.homepage-button {
+  padding: 15px 20px;
+  font-size: 1.2rem;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  flex: 1; /* 버튼이 동일한 크기를 가짐 */
+  max-width: 150px; /* 버튼 최대 너비 제한 */
+}
+
+/* 회원가입 버튼 스타일 */
+.homepage-button.signup {
+  background-color: #007bff; /* 파란색 */
+}
+
+.homepage-button.signup:hover {
+  background-color: #0056b3; /* 어두운 파란색 */
+}
+
+/* 로그인 버튼 스타일 */
+.homepage-button.login {
+  background-color: #28a745; /* 녹색 */
+}
+
+.homepage-button.login:hover {
+  background-color: #1e7e34; /* 어두운 녹색 */
+}
+
+/* 푸터 네비게이션 */
+.footer-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+  background-color: #1f232d; /* 푸터 배경 */
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.nav-button.active {
+  color: #00bcd4; /* 활성화된 버튼 색상 */
+  font-weight: bold;
+}

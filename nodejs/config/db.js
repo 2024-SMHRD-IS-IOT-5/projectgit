@@ -6,9 +6,9 @@ const mysql = require("mysql2");
 const conn = mysql.createConnection({
     // 사용자의 서버 이름 host네임
     host : "project-db-campus.smhrd.com",
-    // 포트번호 지정 가나다라마바사
+    // 포트번호 지정
     port : 3307,
-    // 사용자 계정 정보 
+    // 사용자 계정 정보
     user : "campus_24IS_IOT2_p2_4",
     // 사용자 계정 비밀번호 
     password : "smhrd4", 

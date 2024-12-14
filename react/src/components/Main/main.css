@@ -1,0 +1,172 @@
+/* 전체 페이지 컨테이너 */
+.main-page {
+  width: 428px; /* 고정된 가로 너비 */
+  height: 926px; /* 고정된 세로 높이 */
+  margin: auto;
+  background-color: #1f232d;
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  overflow: hidden; /* 스크롤 방지 */
+}
+
+/* 헤더 스타일 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #1f232d; /* 헤더 배경색 */
+}
+
+header button {
+  background: none;
+  border: none;
+  color: black;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+header span{
+  font-size: 0.8rem;
+  margin: 0;
+  color:slategrey;
+}
+
+.header h6 {
+  font-size: 0.8rem;
+  margin: 0;
+  color:#333;
+}
+
+.header .temperature {
+  font-size: 1rem;
+  margin: 0;
+  color: #00bcd4;
+}
+
+.header .profile-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #555;
+}
+
+/* 메인 이미지 섹션 */
+.main-image {
+  flex: 2; /* 전체 높이의 2/5 */
+  background-color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* 주요 버튼 섹션 */
+.main-icons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+  background-color: #1f232d;
+  height: 80px;
+}
+
+.main-icons .icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-icons .icon img {
+  width: 90px;
+  height: 90px;
+}
+
+.main-icons .icon span {
+  margin-top: 5px;
+  font-size: 0.9rem;
+}
+
+/* 쇼핑몰 영역 */
+.shopping-mall {
+  flex: 5; /* 전체 높이의 3/5 */
+  overflow-y: auto; /* 쇼핑몰만 스크롤 가능 */
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  height: 100%;
+}
+
+.shopping-mall h2 {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.item-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3열 레이아웃 */
+  gap: 10px;
+}
+
+.item-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 8px;
+}
+
+.item-image {
+  width: 60px;
+  height: auto;
+  margin-bottom: 5px;
+}
+
+.item-name {
+  font-size: 0.8rem;
+  margin: 5px 0;
+  color: #555;
+}
+
+.item-price {
+  font-size: 0.7rem;
+  color: #888;
+}
+
+/* 하단 툴바 */
+.footer-toolbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 70px;
+  background-color: #1f232d;
+}
+
+.toolbar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.toolbar-item img {
+  width: 30px;
+  height: 30px;
+}
+
+.toolbar-item span {
+  font-size: 0.8rem;
+  margin-top: 5px;
+  color: #aaa;
+}

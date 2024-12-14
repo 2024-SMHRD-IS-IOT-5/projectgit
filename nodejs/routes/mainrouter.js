@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/",(req,res)=>{
-    res.render("main");
+    res.sendFile(path.join(__dirname,'..' , '..', 'react', 'build', 'index.html'))
 })
 
 // 사용자가 a태그로 회원가입을 요청하는 경우

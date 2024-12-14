@@ -1,0 +1,106 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #2b2f3a;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* 전체 컨테이너 */
+  .signup-steps {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #1f232d;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* 각 단계 컨테이너 */
+  .step-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* 단계 제목 */
+  .step-title {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #00bcd4;
+  }
+  
+  /* 입력 필드 그룹 */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    font-size: 1rem;
+  }
+  
+  /* 버튼 스타일 */
+  .next-button,
+  .complete-button,
+  .login-button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .next-button {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .complete-button {
+    background-color: #ffc107;
+    color: #000;
+  }
+  
+  .login-button {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  /* 에러 메시지 */
+  .error-message {
+    color: #ff4d4d;
+    font-size: 0.9rem;
+    margin-top: 5px;
+  }
+  
+  /* 버튼 그룹 */
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .button-group button {
+    width: 48%;
+  }
+  
+  /* 입력 필드 포커스 효과 */
+  .form-group input:focus {
+    outline: none;
+    box-shadow: 0 0 5px #007bff;
+  }
