@@ -18,13 +18,11 @@ router.post("/join",(req,res)=>{
 
     // 숫자로 형변환이 됐는지 확인
     console.log("After Conversion:");
-    console.log("highTemp:", highTemp, typeof highTemp);
-    console.log("lowTemp:", lowTemp, typeof lowTemp);
-    console.log("prefTemp:", prefTemp, typeof prefTemp);
+    console.log("After Conversion:", { highTemp, lowTemp, prefTemp });
 
 
     // 받아온 post데이터를 DB에 넣는 작업
-    const {user_id, user_pw, user_gender, user_nick, high_temp, low_temp, pref_temp, auto_cover} = req.body;
+    const { user_id, user_pw, user_gender, user_nick, auto_cover } = req.body;
 
     // insert를 위한 쿼리문 제작
     const sql = `
@@ -43,10 +41,10 @@ router.post("/join",(req,res)=>{
         (err, rows) => {
             if (err) {
                 console.error("Database Error:", err.message); // SQL 에러 출력
-                return res.status(500).send("회원가입 실패: " + err.message);
+                return res.status(500).json({ success: false, message: "회원가입 실패", error: err.message });
             }
             console.log("Insert Success:", rows);
-            res.redirect("/"); // 성공 시 메인 페이지로 리다이렉트
+            res.status(200).json({ success: true, message: "회원가입 성공" });
         }
     );
 });
