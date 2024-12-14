@@ -15,6 +15,7 @@ const waterrouter = require("./routes/waterrouter");//급수
 const wrouter = require("./routes/wrouter");        //물상태
 
 // 미들웨어 설정
+app.use(cors());
 app.use(express.json());
 app.use(
     session({
