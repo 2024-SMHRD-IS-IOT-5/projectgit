@@ -10,7 +10,7 @@ const ARDUINO_PORT = '포트번호';           // 아두이노 HTTP 서버 포�
 let waterLevelThreshold = 500; // 초기 수위 설정값 (아날로그 센서 기준)
 
 // 수위 설정 (POST /water/threshold)
-router.post('/api/w_set/threshold', async (req, res) => {
+router.post('/threshold', async (req, res) => {
   const { threshold } = req.body;
 
   if (!threshold || typeof threshold !== 'number' || threshold <= 0 || threshold > 1023) {
@@ -36,7 +36,7 @@ router.post('/api/w_set/threshold', async (req, res) => {
 });
 
 // 현재 수위 설정 조회 (GET /water/threshold)
-router.get('/api/w_set/threshold', async (req, res) => {
+router.get('/threshold', async (req, res) => {
   try {
     res.json({
       message: '현재 수위 설정 값입니다.',
@@ -49,7 +49,7 @@ router.get('/api/w_set/threshold', async (req, res) => {
 });
 
 // 현재 상태 조회 (GET /water/status)
-router.get('/api/w_set/status', async (req, res) => {
+router.get('/status', async (req, res) => {
   try {
     // 아두이노로 상태 조회 요청
     const response = await axios.get(`http://${ARDUINO_IP}:${ARDUINO_PORT}/status`);
