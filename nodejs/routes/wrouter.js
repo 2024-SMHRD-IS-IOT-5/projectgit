@@ -11,7 +11,7 @@ const MAX_WATER_CAPACITY = 100; // 급수기의 최대 물량 (리터)
 let currentWaterLevel = MAX_WATER_CAPACITY; // 현재 물량 (초기값)
 
 // 현재 물 상태 조회 (GET /water/status)
-router.get('/api/w/status', async (req, res) => {
+router.get('http://localhost:5000/api/w/status', async (req, res) => {
   try {
     // 아두이노로 상태 조회 요청
     const response = await axios.get(`http://${ARDUINO_IP}:${ARDUINO_PORT}/status`);
@@ -29,7 +29,7 @@ router.get('/api/w/status', async (req, res) => {
 });
 
 // 물 공급 요청 (POST /water/supply)
-router.post('/api/w/supply', async (req, res) => {
+router.post('http://localhost:5000/api/w/supply', async (req, res) => {
   const { amount } = req.body;
 
   if (!amount || typeof amount !== 'number' || amount <= 0) {
@@ -58,7 +58,7 @@ router.post('/api/w/supply', async (req, res) => {
 });
 
 // 물 보충 요청 (POST /water/refill)
-router.post('/api/w/refill', async (req, res) => {
+router.post('http://localhost:5000/api/w/refill', async (req, res) => {
   try {
     // 아두이노로 물 보충 요청 전송
     const response = await axios.post(`http://${ARDUINO_IP}:${ARDUINO_PORT}/refill`);
@@ -76,7 +76,7 @@ router.post('/api/w/refill', async (req, res) => {
 });
 
 // 물 상태 초기화 (POST /water/reset)
-router.post('/api/w/reset', async (req, res) => {
+router.post('http://localhost:5000/api/w/reset', async (req, res) => {
   try {
     // 아두이노로 초기화 요청 전송
     const response = await axios.post(`http://${ARDUINO_IP}:${ARDUINO_PORT}/reset`);
