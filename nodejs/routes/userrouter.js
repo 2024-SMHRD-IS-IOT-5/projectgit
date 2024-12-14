@@ -98,11 +98,12 @@ router.post("/update",(req,res)=>{
 })
 
 router.post("/delete",(req,res)=>{
-    // 1. 데이터 받기
-    // 2. 업데이트문 작성 => 닉네임 (워크벤치 확인)
-    // update member set nick = ? where id = ? pw = ?
-    // 쿼리 동작 -> 데이터의 순서 생각하기
-    // 완료되면 메인페이지로 이동 -> 완료! 회원탈퇴
+    // 1. 클라이언트로부터 데이터 받기
+    // 2. 탈퇴 SQL 쿼리 작성
+    // 3. SQL 실행 및 결과 처리
+      // 데이터베이스 에러 처리
+    // 4. SQL 실행 결과 확인
+      // 성공적으로 탈퇴한 경우 or 탈퇴 실패 (사용자가 없거나 비밀번호가 틀림).
 
     let {user_id, user_pw} = req.body;
 
