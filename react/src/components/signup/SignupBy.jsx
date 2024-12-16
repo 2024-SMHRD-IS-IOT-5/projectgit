@@ -1,161 +1,189 @@
-import React, { useState } from "react";
+import React,{useEffect, useState} from 'react'
+import axios from '../api/axiosIns'
+import { useNavigate } from 'react-router-dom'
+import "./Signup.css"
 
-const SignupBy = () => {
-  const [step, setStep] = useState(1); // 현재 단계
-  const [formData, setFormData] = useState({
-    id: "",
-    password: "",
-    confirmPassword: "",
-    height: "",
-    weight: "",
-    age: "",
-  });
+const Signup=()=>{
+    const [step,setStep]=useState(1)
+    const [formData,setFormData]=useState({
+        username:'',
+        password:'',
+        confirmPassword:'',
+        height:'',
+        weight:'',
+        age:''})
 
+    const [error,setError]=useState("")
 
+    const navigate=useNavigate()
 
-  // 입력값 변경 처리
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+    useEffect(()=>{
+        if(step===3){
+            alert("회원가입 완료")
+        }
+    },[step])
 
-  // Step 1 유효성 검사 및 Step 2로 이동
-  const handleNextStep = () => {
-    if (!formData.id || !formData.password) {
-      alert("아이디와 비밀번호를 입력해주세요.");
-      return;
+    const handleChange=(e)=>{
+        setFormData({...formData,[e.target.name]: e.target.value})
     }
-    if (formData.password !== formData.confirmPassword) {
-      alert("비밀번호가 일치하지 않습니다.");
-      return;
+        
+    const nextStep=()=>{
+        // Step.1 : Id 랑 비번 검증
+        if(step===1){
+            if(!formData.username || !formData.password){
+                setError("ID와 비밀번호를 입력해")
+                return
+            }
+            if(formData.password !==formData.confirmPassword){
+                setError('비번과 재입력한 비번이 불일치')
+                return
+            }
+            setError("")
+        }
+
+        // step.2 : 키와 몸무게 검증
+        if(step===2){
+            if(!formData.height || !formData.weight){
+                setError("키와 몸무게를 입력")
+                return
+            }
+            setError("")
+        }
+
+        if(step<3){
+            setStep(step+1)
+        }
     }
-    setStep(2); // Step 2로 이동
-  };
 
-  // 최종 제출 (Step 2)
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-
-    // Step 1과 Step 2 데이터를 서버로 전송
-    const dataToSend = {
-      id: formData.id,
-      password: formData.password,
-      height: formData.height,
-      weight: formData.weight,
-      age: formData.age,
-    };
-
-    try {
-      const response = await fetch("/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataToSend),
-      });
-
-      if (response.ok) {
-        alert("회원가입이 완료되었습니다!");
-        setFormData({
-          id: "",
-          password: "",
-          confirmPassword: "",
-          height: "",
-          weight: "",
-          age: "",
-        });
-        setStep(1);
-      } else {
-        const result = await response.json();
-        alert(`오류: ${result.message}`);
-      }
-    } catch (error) {
-      console.error("회원가입 요청 중 오류 발생:", error);
-      alert("서버와 연결할 수 없습니다.");
+    const handleRestart=()=>{
+        navigate("/")
     }
-  };
 
-  return (
-    <div>
-      {step === 1 ? (
-        <form>
-          <h2>Step 1: 계정 정보</h2>
-          <label>
-            아이디:
-            <input
-              type="text"
-              name="id"
-              value={formData.id}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <br />
-          <label>
-            비밀번호:
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <br />
-          <label>
-            비밀번호 확인:
-            <input
-              type="password"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <br />
-          <button type="button" onClick={handleNextStep}>
-            다음 단계
-          </button>
+    const handleLogin=()=>{
+        navigate("/login")
+    }
+
+    const handleSubmit=async (e)=>{
+        e.preventDefault();
+        try{
+            const response=await axios.post('/api/signup',formData)
+            window.alert(response.data.message);
+        }catch (error){
+            console.error('회원가입 실패:',error)
+            window.alert("회원가입 실패")
+        }
+    }
+
+
+    return(
+        <form onSubmit={handleSubmit}>        
+            <div className='signup-steps'>
+                {step===1&&(
+                <div className='step-container'>
+                    <h2 className='step-title'>Step 1 : 개인정보 입력</h2>
+                    <div className='form-group'>
+                    <label>ID :</label>
+                    <input
+                        type='text'
+                        name='username'
+                        placeholder='아이디 입력'
+                        value={formData.username}
+                        onChange={handleChange}
+                        required
+                    />
+                    </div>
+                    <div className='form-group'>
+                    <label>비밀번호 :</label>
+                    <input 
+                        type='password'
+                        name='password'
+                        placeholder='비밀번호 입력'
+                        value={formData.password}
+                        onChange={handleChange}
+                        required
+                    />
+                    </div>
+                    <div className='form-group'>
+                    <label> 비밀번호 재입력 :</label>
+                    <input 
+                        type='password'
+                        name='confirmPassword'
+                        placeholder='비밀번호 재입력'
+                        value={formData.confirmPassword}
+                        onChange={handleChange}
+                        required
+                    />
+                    </div>
+                    {error && <p className='error-message'>{error}</p> }
+                    <button className='next-button' onClick={nextStep}>
+                    입력 완료/ 다음 스텝
+                    </button>
+                </div>
+                )}
+
+                {step===2&&(
+                <div className='step-container'>
+                    <h2 className='step-title'>Step 2 : 추가정보입력</h2>
+                    <div className='form-group'>
+                    <label> 키 :</label>
+                    <input
+                        type='text'
+                        name='height'
+                        placeholder='키 입력'
+                        value={formData.height}
+                        onChange={handleChange}
+                        required
+                    />
+                    </div>
+                    <div className='form-group'>
+                    <label>몸무게 :</label>
+                    <input
+                        type='text'
+                        name='weight'
+                        placeholder='몸무게 입력'
+                        value={formData.weight}
+                        onChange={handleChange}
+                        required
+                    />
+                    </div>
+                    <div className='form-group'>
+                    <label >나이 (선택사항) :</label>
+                    <input 
+                        type='number'
+                        name='age'
+                        placeholder='나이 입력'
+                        value={formData.age}
+                        onChange={handleChange}
+                    />
+                    </div>
+                    {error && <p className='error-message'>{error}</p> }
+                    <button className='next-button' onClick={nextStep}>
+                    완료
+                    </button>
+                </div>
+                )}
+
+                {step===3&&(
+                <div className='step-container'>
+                    <h2 className='step-title'>Step 3 : 회원가입 완료</h2>
+                    <div className='button-group'>
+                    <button className='complete-button' onClick={handleRestart}>
+                        초기 페이지로
+                    </button>
+                    <button className='login-button' onClick={handleLogin}>
+                        로그인 페이지로
+                    </button>
+                    </div>
+                </div>
+                )}
+            </div>
         </form>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <h2>Step 2: 추가 정보</h2>
-          <label>
-            키 (cm):
-            <input
-              type="number"
-              name="height"
-              value={formData.height}
-              onChange={handleChange}
-            />
-          </label>
-          <br />
-          <label>
-            몸무게 (kg):
-            <input
-              type="number"
-              name="weight"
-              value={formData.weight}
-              onChange={handleChange}
-            />
-          </label>
-          <br />
-          <label>
-            나이 (선택):
-            <input
-              type="number"
-              name="age"
-              value={formData.age}
-              onChange={handleChange}
-            />
-          </label>
-          <br />
-          <button type="submit">회원가입 완료</button>
-        </form>
-      )}
-    </div>
-  );
-};
+    )
 
-export default SignupBy;
+}
+
+
+
+
+
+export default Signup;
