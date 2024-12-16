@@ -26,19 +26,19 @@ app.use(
 );
 
 // 정적 파일 서빙
-app.use(express.static(path.join(__dirname, '..', 'react', 'build'))); // 리액트 프로그램 경로 설정
+app.use(express.static(path.join(__dirname, 'react', 'build'))); // 리액트 프로그램 경로 설정
 
 
 
 app.use(bp.urlencoded({extended:true}));
 app.use("/", mainrouter);
-app.use("/user", userrouter);
+app.use("/api", userrouter);
 
 
-app.use("/cover",coverrouter); //덮개
-app.use("/w_set",w_setrouter); //수위설정
-app.use("/water",waterrouter); //급수
-app.use("/w",wrouter);         //물상태
+app.use("/api/cover",coverrouter); //덮개
+app.use("/api/w_set",w_setrouter); //수위설정
+app.use("/api/water",waterrouter); //급수
+app.use("/api/w",wrouter);         //물상태
 
 
 app.set("view engine", "html")
@@ -46,5 +46,16 @@ nunjucks.configure("views", {
     express : app,
     watch : true
 })
+
+// 정의되지 않은 라우트 처리
+app.use((req, res, next) => {
+    res.status(404).json({ success: false, message: "API 경로를 찾을 수 없습니다." });
+});
+
+// 서버 에러 처리
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ success: false, message: "서버 오류가 발생했습니다." });
+});
 
 app.listen(3000);
