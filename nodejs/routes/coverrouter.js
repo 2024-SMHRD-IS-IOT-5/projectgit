@@ -3,14 +3,19 @@ const axios = require('axios');
 const router = express.Router();
 
 // 아두이노 서버 정보
+<<<<<<< HEAD
 // const ARDUINO_IP = '주소'; // 아두이노 IP 주소
 // const ARDUINO_PORT = 포트번호;           // 아두이노 HTTP 서버 포트
 
+=======
+const ARDUINO_IP = 'http://192.168.219.180/'; // 아두이노 IP 주소
+const ARDUINO_PORT = 3001;           // 아두이노 HTTP 서버 포트
+>>>>>>> 03c84266a853da43ad17c6ffda132c97cbc47a5c
 // 덮개 상태
 let isCoverOpen = false; // 초기 덮개 상태
 
 // 덮개 열기 (POST /cover/open)
-router.post('/api/cover/open', async (req, res) => {
+router.post('/open', async (req, res) => {
   if (isCoverOpen) {
     return res.status(400).json({ error: '덮개가 이미 열려 있습니다.' });
   }
@@ -52,7 +57,7 @@ router.post('/close', async (req, res) => {
 });
 
 // 덮개 상태 조회 (GET /cover/status)
-router.get('/api/cover/status', async (req, res) => {
+router.get('/status', async (req, res) => {
   try {
     // 아두이노로 상태 조회 요청
     const response = await axios.get(`http://${ARDUINO_IP}:${ARDUINO_PORT}/status`);
@@ -67,7 +72,7 @@ router.get('/api/cover/status', async (req, res) => {
 });
 
 // 덮개 상태 초기화 (POST /cover/reset)
-router.post('/api/cover/reset', async (req, res) => {
+router.post('/reset', async (req, res) => {
   try {
     // 아두이노로 초기화 요청 전송
     const response = await axios.post(`http://${ARDUINO_IP}:${ARDUINO_PORT}/reset`);
