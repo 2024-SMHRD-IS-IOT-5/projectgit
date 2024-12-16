@@ -3,7 +3,7 @@ const app = express();
 const bp = require("body-parser");
 const cors = require('cors');
 const nunjucks = require("nunjucks");
-const mainrouter = require("./routes/mainrouter");
+
 const userrouter = require("./routes/userrouter");
 // 프로필 화면
 const session = require("express-session");
@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'react', 'build'))); // 리액트 �
 
 app.use(bp.urlencoded({extended:true}));
 // app.use("/", mainrouter);
-app.use("/api", userrouter);
+app.use("/", userrouter);
 
 
 app.use("/api/cover",coverrouter); //덮개
