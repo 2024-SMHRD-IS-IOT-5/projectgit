@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "../api/axiosIns";
 import "./login.css"; // CSS 파일 import
 
 const LoginPage = () => {
@@ -12,12 +13,22 @@ const LoginPage = () => {
     setCredentials({ ...credentials, [name]: value });
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (credentials.username === "test" && credentials.password === "1234") {
-      navigate("/profile"); // 로그인 성공 시 프로필 선택 페이지로 이동
-    } else {
-      setError("아이디 또는 비밀번호가 잘못되었습니다.");
+
+    try {
+      // 백엔드 서버로 POST 요청 보내기
+      const response = await axios.post("/login", credentials);
+
+      if (response.data.success) {
+        alert("로그인 성공!");
+        navigate("/profile"); // 로그인 성공 시 프로필 선택 페이지로 이동
+      } else {
+        setError(response.data.message); // 서버에서 반환된 에러 메시지 표시
+      }
+    } catch (error) {
+      console.error("로그인 실패:", error.response?.data || error.message);
+      setError("서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
     }
   };
 

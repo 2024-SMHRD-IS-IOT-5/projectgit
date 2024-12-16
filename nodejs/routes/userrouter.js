@@ -46,20 +46,21 @@ router.post("/signup", (req, res) => {
 // 사용자가 로그인을 한 경우
 router.post("/login", (req, res) => {
     // 1) req.body안의 데이터를 저장(변수에 넣기) -> 비구조화할당
-    let { user_id, user_pw } = req.body;
+    const { username,password } = req.body;
+
+    console.log("Received Data:", { username, password });
 
     // 2) SQL 쿼리문 작성 -> select * from user_info where user_id = ? and user_pw = ?
-    let sql = "SELECT * FROM user_info WHERE user_id = ? AND user_pw = ?";
+    const sql = "SELECT * FROM member WHERE user_id = ? AND user_pw = ?";
 
     // 3) conn을 통해서 query를 실행 -> 콘솔창에 rows값 출력
-    conn.query(sql, [user_id, user_pw], (err, rows) => {
+    conn.query(sql, [username, password], (err, rows) => {
         if (err) {
             console.error("Database Error:", err.message);
             return res.status(500).json({ success: false, message: "로그인 처리 중 오류 발생" });
         }
         if (rows.length > 0) {
             // 로그인 성공 - userId를 세션에 저장
-            req.session.userId = rows[0].user_id;
             res.status(200).json({ success: true, message: "로그인 성공", user: rows[0] });
         } else {
             res.status(401).json({ success: false, message: "로그인 실패: 아이디 또는 비밀번호가 틀렸습니다." });

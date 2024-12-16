@@ -35,7 +35,7 @@ app.use(express.static(path.join(__dirname, 'react', 'build'))); // 리액트 �
 
 
 app.use(bp.urlencoded({extended:true}));
-app.use("/", mainrouter);
+// app.use("/", mainrouter);
 app.use("/api", userrouter);
 
 
