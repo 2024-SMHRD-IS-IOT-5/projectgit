@@ -3,8 +3,8 @@ const axios = require('axios');
 const router = express.Router();
 
 // 아두이노 서버 정보
-const ARDUINO_IP = '주소'; // 아두이노 IP 주소
-const ARDUINO_PORT = '포트번호';           // 아두이노 HTTP 서버 포트
+const ARDUINO_IP = 'http://192.168.219.180'; // 아두이노 IP 주소
+const ARDUINO_PORT = 3001;           // 아두이노 HTTP 서버 포트
 
 // 수위 설정 상태
 let waterLevelThreshold = 500; // 초기 수위 설정값 (아날로그 센서 기준)

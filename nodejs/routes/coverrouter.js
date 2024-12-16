@@ -3,7 +3,7 @@ const axios = require('axios');
 const router = express.Router();
 
 // 아두이노 서버 정보
-const ARDUINO_IP = 'http://192.168.219.180/'; // 아두이노 IP 주소
+const ARDUINO_IP = 'http://192.168.219.180'; // 아두이노 IP 주소
 const ARDUINO_PORT = 3001;           // 아두이노 HTTP 서버 포트
 // 덮개 상태
 let isCoverOpen = false; // 초기 덮개 상태
