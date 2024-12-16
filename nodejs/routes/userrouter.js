@@ -5,40 +5,42 @@ const conn = require("../config/db");
 const path = require("path");
 
 // 1) 사용자가 회원가입한 데이터를 보냈을 때 처리할 영역
-router.post("/api/signup", (req, res) => {
-    console.log(req.body);
+router.post("/signup", (req, res) => {
+    const { username, password, height, weight, age } = req.body; // 프론트에서 보낸 데이터 받기
 
-    // 숫자로 형변환
-    const highTemp = Number(req.body.high_temp);
-    const lowTemp = Number(req.body.low_temp);
-    const prefTemp = Number(req.body.pref_temp);
+    // 서버로 넘어온 데이터 확인
+    console.log("Received Data:", { username, password, height, weight, age });
 
-    // 숫자로 형변환이 됐는지 확인
-    console.log("After Conversion:", { highTemp, lowTemp, prefTemp });
 
-    // 받아온 post데이터를 DB에 넣는 작업
-    const { user_id, user_pw, user_gender, user_nick, auto_cover } = req.body;
+    // SQL 쿼리: DB에 사용자 정보 저장
+    const sql = 'INSERT INTO member (user_id, user_pw, user_h, user_w, user_age)VALUES (?, ?, ?, ?, ?)'
+    
+    // // 숫자로 형변환
+    // const highTemp = Number(req.body.high_temp);
+    // const lowTemp = Number(req.body.low_temp);
+    // const prefTemp = Number(req.body.pref_temp);
 
-    // insert를 위한 쿼리문 제작
-    const sql = `
-        INSERT INTO user_info (
-            user_id, user_pw, user_gender, user_nick, high_temp, low_temp, pref_temp, auto_cover
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    `;
+    // // 숫자로 형변환이 됐는지 확인
+    // console.log("After Conversion:", { highTemp, lowTemp, prefTemp });
+
+    // // 받아온 post데이터를 DB에 넣는 작업
+    // const { user_id, user_pw, user_gender, user_nick, auto_cover } = req.body;
+
+    // // insert를 위한 쿼리문 제작
+    // const sql = `
+    //     INSERT INTO user_info (
+    //         user_id, user_pw, user_gender, user_nick, high_temp, low_temp, pref_temp, auto_cover
+    //     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    // `;
 
     // conn을 통해서 DB와 연결 데이터 + sql 연결
-    conn.query(
-        sql,
-        [user_id, user_pw, user_gender, user_nick, highTemp, lowTemp, prefTemp, auto_cover],
-        (err, rows) => {
-            if (err) {
-                console.error("Database Error:", err.message); // SQL 에러 출력
-                return res.status(500).json({ success: false, message: "회원가입 실패", error: err.message });
-            }
-            console.log("Insert Success:", rows);
-            res.status(200).json({ success: true, message: "회원가입 성공" });
+    conn.query(sql, [username, password, height, weight, age], (err, result) => {
+        if (err) {
+          console.error("Database Error:", err.message);
+          return res.status(500).json({ success: false, message: "회원가입 실패", error: err.message });
         }
-    );
+        res.status(200).json({ success: true, message: "회원가입이 완료되었습니다!" });
+      });
 });
 
 // 사용자가 로그인을 한 경우
