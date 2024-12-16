@@ -11,6 +11,8 @@ const SignupBy = () => {
     age: "",
   });
 
+
+
   // 입력값 변경 처리
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,6 +36,7 @@ const SignupBy = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
     // Step 1과 Step 2 데이터를 서버로 전송
     const dataToSend = {
       id: formData.id,
@@ -44,7 +47,7 @@ const SignupBy = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:3001/api/signup", {
+      const response = await fetch("/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
