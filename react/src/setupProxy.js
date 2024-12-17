@@ -5,7 +5,7 @@ module.exports = function (app) {
     app.use(
         '/control',
         createProxyMiddleware({
-            target: 'http://192.168.219.49:80', // ESP32 주소
+            target: 'http://192.168.219.158:80', // ESP32 주소
             changeOrigin: true,
         })
     );

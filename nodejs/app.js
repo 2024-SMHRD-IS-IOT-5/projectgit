@@ -12,10 +12,11 @@ const path = require("path");
 
 // 라우터 임포트
 const userrouter = require("./routes/userrouter");
-const coverrouter = require("./routes/coverrouter");//덮개
+const foldrouter = require("./routes/foldrouter");//덮개
 const w_setrouter = require("./routes/w_setrouter");//수위설정
 const waterrouter = require("./routes/waterrouter");//급수
 const wrouter = require("./routes/wrouter");        //물상태
+const wTemprouter = require("./routes/wTemprouter");        // 기장선 테스트용
 const esp32 = require('./routes/esp32');
 
 // const Server=http.createServer(app); //HTTP 서버 생성 , 기장선
@@ -48,11 +49,16 @@ app.use(
 
 // app.use("/", mainrouter);
 app.use("/", userrouter);
-app.use("/api/cover",coverrouter); //덮개
+app.use("/api/cover",foldrouter); //덮개
 app.use("/api/w_set",w_setrouter); //수위설정
 app.use("/api/Water",waterrouter); //급수
 app.use("/api/w",wrouter);         //물상태
+app.use("/api/wTemp",wTemprouter);         //기장선 테스트
 app.use("/api/sensor",esp32);
+
+app.get('/test2',(req,res)=>{
+    res.send("Hello");
+})
 
 app.get('/test', (req,res)=>{
     console.log("센서데이터:",req.query);
