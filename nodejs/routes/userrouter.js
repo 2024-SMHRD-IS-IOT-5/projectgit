@@ -61,7 +61,7 @@ router.post("/login", (req, res) => {
         }
         if (rows.length > 0) {
             // 로그인 성공 - userId를 세션에 저장
-            res.status(200).json({ success: true, message: "로그인 성공", user: rows[0] });
+            res.status(200).json({ success: true, message: "로그인 성공", username: rows[0].user_id });
         } else {
             res.status(401).json({ success: false, message: "로그인 실패: 아이디 또는 비밀번호가 틀렸습니다." });
         }
@@ -161,5 +161,25 @@ router.get("/user/personalized-data", (req, res) => {
         res.status(200).json({ success: true, data: results });
     });
 });
+
+// 온도 설정 저장 API
+router.post("/set-temp", (req, res) => {
+    const { temperature } = req.body;
+
+    if (!temperature) {
+        return res.status(400).json({ success: false, message: "온도 값이 없습니다." });
+    }
+
+    const sql = "INSERT INTO temperature_settings (temp_value) VALUES (?)";
+
+    conn.query(sql, [temperature], (err, result) => {
+        if (err) {
+            console.error("DB 저장 실패:", err.message);
+            return res.status(500).json({ success: false, message: "DB 저장 실패", error: err.message });
+        }
+        res.status(200).json({ success: true, message: "온도가 성공적으로 저장되었습니다." });
+    });
+});
+
 
 module.exports = router;

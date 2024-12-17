@@ -21,6 +21,7 @@ const LoginPage = () => {
       const response = await axios.post("/login", credentials);
 
       if (response.data.success) {
+        localStorage.setItem("username", response.data.username); // username 저장
         alert("로그인 성공!");
         navigate("/profile"); // 로그인 성공 시 프로필 선택 페이지로 이동
       } else {

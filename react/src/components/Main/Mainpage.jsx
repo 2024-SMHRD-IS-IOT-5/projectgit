@@ -3,49 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import "./main.css"
 import axios from 'axios'
 
-// WebSocketComponent 정의
-const WebSocketComponent = () => {
-  const [sensorData, setSensorData] = useState({
-    temperature: null,
-    waterLevel: null,
-    waterStatus: null,
-  });
-
-  useEffect(() => {
-    const ws = new WebSocket("ws://192.168.219.61/ws");
-
-    ws.onopen = () => {
-      console.log("Connected to WebSocket");
-    };
-
-    ws.onmessage = (event) => {
-      console.log("Message from ESP32:", event.data);
-      const data = JSON.parse(event.data);
-      setSensorData({
-        temperature: data.temperature,
-        waterLevel: data.waterLevel,
-        waterStatus: data.waterStatus,
-      });
-    };
-
-    ws.onerror = (error) => {
-      console.error("WebSocket Error:", error);
-    };
-
-    return () => {
-      ws.close();
-    };
-  }, []);
-
-  return (
-    <div>
-      <h6>Temperature: {sensorData.temperature}°C</h6>
-      <h6>Water Level: {sensorData.waterLevel}</h6>
-      <h6>Water Status: {sensorData.waterStatus}</h6>
-    </div>
-  );
-};
-
 const Mainpage = () => {
   const navigate = useNavigate();
   const [currentTemp, setCurrentTemp] = useState(38); // 현재 온도

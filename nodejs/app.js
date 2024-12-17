@@ -50,7 +50,7 @@ app.use(
 app.use("/", userrouter);
 app.use("/api/cover",coverrouter); //덮개
 app.use("/api/w_set",w_setrouter); //수위설정
-app.use("/api/water",waterrouter); //급수
+app.use("/api/Water",waterrouter); //급수
 app.use("/api/w",wrouter);         //물상태
 app.use("/api/sensor",esp32);
 
