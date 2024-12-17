@@ -9,7 +9,7 @@ const userrouter = require("./routes/userrouter");
 const session = require("express-session");
 const path = require("path");
 
-const coverrouter = require("./routes/coverrouter");//덮개
+const foldrouter = require("./routes/foldrouter");//덮개
 const w_setrouter = require("./routes/w_setrouter");//수위설정
 const waterrouter = require("./routes/waterrouter");//급수
 const wrouter = require("./routes/wrouter");        //물상태
@@ -39,9 +39,9 @@ app.use(bp.urlencoded({extended:true}));
 app.use("/", userrouter);
 
 
-app.use("/api/cover",coverrouter); //덮개
+app.use("/api/Fold",foldrouter); //덮개
 app.use("/api/w_set",w_setrouter); //수위설정
-app.use("/api/water",waterrouter); //급수
+app.use("/api/Water",waterrouter); //급수
 app.use("/api/w",wrouter);         //물상태
 
 
