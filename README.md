@@ -132,20 +132,20 @@ http
     <td align="center"><b>Frontend</b></td>
   </tr>
   <tr>
-    <td align="center"><a href="https://github.com/자신의username작성해주세요" target='_blank'>github</a></td>
-    <td align="center"><a href="https://github.com/자신의username작성해주세요" target='_blank'>github</a></td>
-    <td align="center"><a href="https://github.com/자신의username작성해주세요" target='_blank'>github</a></td>
-    <td align="center"><a href="https://github.com/자신의username작성해주세요" target='_blank'>github</a></td>
-    <td align="center"><a href="https://github.com/자신의username작성해주세요" target='_blank'>github</a></td>
+    <td align="center"><a href="https://github.com/shineunji1" target='_blank'>github</a></td>
+    <td align="center"><a href="https://github.com/Gabriel-Ki" target='_blank'>github</a></td>
+    <td align="center"><a href="https://github.com/Jang07027" target='_blank'>github</a></td>
+    <td align="center"><a href="https://github.com/Jang07027" target='_blank'>github</a></td>
+    <td align="center"><a href="https://github.com/" target='_blank'>github</a></td>
   </tr>
 </table>
 
 ## 🤾‍♂️ 트러블슈팅
-개념: 문제 해결을 위해 문제의 원인을 논리적이고 체계적으로 찾는 일이며 제품이나 프로세스의 운영을 재개
-프로젝트 진행하는 동안 발생했던 이슈 중 가장 기억에 남았던 문제와 해결 프로세스 나열(2~5가지 정도)
-  
-* 문제1<br>
- DB, nodejs 연결부분에서
- 
-* 문제2<br>
- 문제점 설명 및 해결방안
+문제1
+React 와 Node 서버 통신할 때, 하나의 컴퓨터(localhost)에서 같은 port를 사용할 수 없음 *(프로그램 하나 당 포트 한개 할당) 따라서 React와 Node의 포트를 각각 3000번, 3001번으로 다르게 만들었음.
+하지만, 다른 port 번호끼리 요청을 보낼 때, COP 정책에 따라서 CORS 에러가 발생하게 됨.
+이를 해결하기 위해, 리액트에서 노드로 API 요청을 보낼 때 proxy 설정을 통해 서버 간 통신을 원활하게 함. 
+
+문제2
+아두이노 부품 선정 문제
+전압이 높은 제품을 사용하기 때문에 릴레이 스위치, 모터 드라이브, MOSFET 등을 이용하여 IoT 회로 설계도를 작성함.
