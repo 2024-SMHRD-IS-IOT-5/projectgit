@@ -1,6 +1,6 @@
 # 📎 스마트 욕조 (팀명: 창영이와 형님들)
 ![image](https://upload2.inven.co.kr/upload/2018/01/23/bbs/i15971120021.gif)
-https://upload2.inven.co.kr/upload/2018/01/23/bbs/i15971120021.gif
+
 
 
 
